@@ -1,6 +1,5 @@
 import React from "react"
 import { ReactDOM, useState } from "react"
-import Input from "./Input"
 import axios from 'axios'
 
 // const Register = () => {
@@ -61,8 +60,8 @@ class Register extends React.Component {
     render() {
         return (
             <form className="form" onSubmit={this.onFormSubmit}>
-                <Input type="text" value = {this.state.email} onChange = {this.onEmailUpdate}/>
-                <Input type="password" value = {this.state.password} onChange = {this.onPasswordUpdate}/>
+                <input type="text" value = {this.state.email} onChange = {this.onEmailUpdate}/>
+                <input type="password" value = {this.state.password} onChange = {this.onPasswordUpdate}/>
                 <button type="submit">Register</button>
             </form>
         )

@@ -1,33 +1,33 @@
-import React from "react"
-import { ReactDOM, useState } from "react"
-import Login from '../components/Login'
-import Register from '../components/Register'
-
-const Dashboard = () => {
-
-    // const [active, setActive] = useState(true)
-
-    return (
-        // <div className='landingpage'>
-        //     <div className='content-container'>
-        //         <div className='tab-register' onClick={() => setActive(true)}>
-        //             <h2 style={{ color: active ? '#c20114' : null }}>Register</h2>
-        //         </div>
-
-        //         <div className='tab-login' onClick={() => setActive(false)}>
-        //             <h2 style={{ color: !active ? '#c20114' : null }}>Login</h2>
-        //         </div>
-        //     </div>
-
-        //     {active ? <Register /> : <Login />}
-        // </div>
-
-        <div className="container">
-            <h1>Dashboard</h1>
-        </div>
-    )
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {setAuth} from '../redux/authReducer'
+import { useNavigate } from "react-router-dom";
 
 
+
+export default function Dashboard() {
+    const auth = useSelector((state) => state.auth.authenticated)
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
+
+
+    const onLogout = () =>{
+        dispatch(setAuth({auth: false, token: ''}))
+        navigate("/")
+    }
+
+    if (auth) {
+        return (
+            <div>
+                <button onClick = {onLogout}>Logout</button>
+                <h1>Dashboars</h1>
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                <h3>403 - Not Authenticated</h3>
+            </div>)
+    }
 }
-
-export default Dashboard

@@ -26,16 +26,16 @@ app.post('/createUser', jsonParser, async (req, res) => {
 
 // log the user in
 app.post('/loginUser', jsonParser, async (req, res) => {
-    // try {
-    const user = await User.findByCredentials(req.body.email, req.body.password)
-    const token = await user.generateAuthToken()
-    res.send({ token })
-    // }
-    // catch (e) {
-    //     res.status(403).send()
-    // }
+    try {
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        const token = await user.generateAuthToken()
+        res.send({ token })
+    }
+    catch (e) {
+        res.status(403).send()
+    }
 })
 
-app.listen(8080, ()=>{
+app.listen(8080, () => {
     console.log('server started on port 8080')
 })
